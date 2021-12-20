@@ -21,7 +21,7 @@ public class Movies_sqlite {
 			if(op==1) {
 			//Creating a Table
 			Statement stmt=con.createStatement();
-			stmt.executeUpdate("create table movies(movie text primary key,actor text,actress text,releaseyear int,director text)");
+			stmt.executeUpdate("create table IF NOT EXISTS movies(movie text primary key,actor text,actress text,releaseyear int,director text)");
 			System.out.println("Table Created");
 			}
 			
@@ -67,10 +67,10 @@ public class Movies_sqlite {
 			}
 			//Retrieving all movie details of the Table
 			else if(op==5) {
-				PreparedStatement pstmt=con.prepareStatement("select * from products");
+				PreparedStatement pstmt=con.prepareStatement("select * from movies");
 				ResultSet rs=pstmt.executeQuery();
-				System.out.println("movie name\t actor name\t actress name\t releasedate\t director name");
-				System.out.println("------------------------------------------------------");
+				System.out.println("movie name  \t actor name\t actress name\t releasedate\t director name");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				while(rs.next())
 				{
 				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4)+"\t"+rs.getString(5));
@@ -79,11 +79,11 @@ public class Movies_sqlite {
 			
 			//Retrieving specific movie based on the actor details of the Table
 			else if(op==6) {
-				PreparedStatement pstmt=con.prepareStatement("select * from products where actor='TomHardy'");
+				PreparedStatement pstmt=con.prepareStatement("select * from movies where actor='TomHardy'");
 				ResultSet rs=pstmt.executeQuery();
-				System.out.println("movie name\t actor name\t actress name\t releasedate\t director name");
+				System.out.println("movie name\t\t actor name\t\t actress name\t\t releasedate\t\t director name");
 				System.out.println("------------------------------------------------------");
-				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4)+"\t"+rs.getString(5));
+				System.out.println(rs.getString(1)+"    \t\t"+rs.getString(2)+"\t\t"+rs.getString(3)+"\t\t"+rs.getInt(4)+"\t\t"+rs.getString(5));
 			}
 			
 			
